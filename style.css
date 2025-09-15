@@ -373,10 +373,56 @@ section {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .brands-right p {
-        padding: 1.5rem;
+    /* Ajustements généraux */
+    body {
+        font-size: 14px;
     }
     
+    section {
+        padding: 1rem;
+        min-height: 100vh;
+    }
+    
+    /* Hero section mobile */
+    .hero-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1.2rem, 6vw, 2rem);
+        margin-bottom: 0.3rem;
+    }
+    
+    .hero-description {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+    
+    /* Sections de contenu */
+    .brands-right p,
+    .logo-right p {
+        padding: 1.5rem;
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+    
+    .brands-right h2,
+    .logo-right h2 {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Numéros mobile */
+    .number-display {
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    
+    .number {
+        font-size: clamp(4rem, 15vw, 8rem);
+        padding: 0.8rem 1.5rem;
+    }
+    
+    /* Formulaire mobile */
     .order-content {
         flex-direction: column;
         justify-content: center;
@@ -402,18 +448,55 @@ section {
     
     .order-form {
         order: 2;
+        max-width: 100%;
     }
     
     .order-form h2 {
         text-align: center;
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
     }
     
     .order-form-container {
         padding: 1.5rem;
     }
     
-    section {
-        padding: 1rem;
+    .form-group input,
+    .form-group select {
+        padding: 0.8rem;
+        font-size: 16px; /* Évite le zoom sur iOS */
+    }
+    
+    .submit-button {
+        padding: 1rem 1.5rem;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+    
+    /* Container Three.js mobile */
+    #three-container {
+        z-index: 1; /* En dessous de tout sur mobile */
+    }
+    
+    /* Ajustements des z-index pour mobile */
+    .hero-section {
+        z-index: 10;
+    }
+    
+    .brands-section,
+    .left-logo-section,
+    .right-logo-section,
+    .back-number-section,
+    .order-section {
+        z-index: 10;
+    }
+    
+    /* Assurer que le contenu est au-dessus du modèle 3D */
+    .hero-content,
+    .brands-right,
+    .logo-right,
+    .number-content,
+    .order-form {
+        z-index: 15;
+        position: relative;
     }
 }
 

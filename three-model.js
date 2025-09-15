@@ -11,12 +11,13 @@ let camera, scene, renderer, light;
 scene = new THREE.Scene();
 
 // camera
-const fov = 35;
+const isMobile = window.innerWidth <= 768;
+const fov = isMobile ? 50 : 35;
 const aspect = container.clientWidth / container.clientHeight;
 const near = 0.01;
 const far = 1000;
 camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 1;
+camera.position.z = isMobile ? 0.3 : 1;
 light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 
@@ -60,7 +61,15 @@ loader.load(
 
     const tshirt = gltf.scene.children[0];
     tshirt.position.set(0, -0.06, 0);
-    tshirt.scale.set(0.00045, 0.00045, 0.00045);
+    
+    // Ajuster la taille selon l'appareil
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      tshirt.scale.set(0.0003, 0.0003, 0.0003); // Taille mobile plus petite
+      tshirt.position.set(0, -0.06, -0.2); // Position mobile
+    } else {
+      tshirt.scale.set(0.00045, 0.00045, 0.00045); // Taille desktop
+    }
     tshirt.material=new THREE.MeshStandardMaterial({
       roughness: 0.9,
     });

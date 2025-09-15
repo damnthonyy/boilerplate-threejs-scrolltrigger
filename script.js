@@ -12,6 +12,48 @@ ScrollTrigger.defaults({
   scrub: 1.5,
 });
 
+// Détection mobile
+const isMobile = window.innerWidth <= 768;
+
+// Fonction pour ajuster la taille du modèle 3D
+function adjustModelSize() {
+  const isMobileNow = window.innerWidth <= 768;
+  
+  if (isMobileNow) {
+    // Ajustements pour mobile
+    if (scene.children.length > 0) {
+      const tshirt = scene.children.find(child => child.type === 'Group' || child.isMesh);
+      if (tshirt) {
+        tshirt.scale.set(0.0003, 0.0003, 0.0003); // Taille mobile plus petite
+        tshirt.position.set(0, -0.06, -0.2); // Position mobile
+      }
+    }
+    
+    // Ajuster la position de la caméra pour mobile
+    camera.position.set(0, 0, 0.5);
+    camera.fov = 50; // FOV encore plus large pour mobile
+    camera.updateProjectionMatrix();
+  } else {
+    // Ajustements pour desktop - valeurs initiales
+    if (scene.children.length > 0) {
+      const tshirt = scene.children.find(child => child.type === 'Group' || child.isMesh);
+      if (tshirt) {
+        tshirt.scale.set(0.00045, 0.00045, 0.00045); // Taille initiale desktop
+        tshirt.position.set(0, -0.06, 0); // Position initiale desktop
+      }
+    }
+    
+    // Position de caméra pour desktop - valeurs initiales
+    camera.position.set(0, 0, 1);
+    camera.fov = 35;
+    camera.updateProjectionMatrix();
+  }
+}
+
+// Appeler la fonction au chargement et au redimensionnement
+adjustModelSize();
+window.addEventListener('resize', adjustModelSize);
+
 // Animation du modèle 3D pendant le scroll
 let modelAnimTl = gsap.timeline({
   scrollTrigger: {
@@ -23,17 +65,22 @@ let modelAnimTl = gsap.timeline({
   },
 });
 
-modelAnimTl
-  .to(scene.position, { z: 0.5, duration: 0.5 })
-  .to(camera.position, { x: 0.2, y: 0.15, duration: 0.5 })
-  .to(camera.position, { x: -0.2 ,y:0.20, duration: 1.5 })
-  .to(camera.position, { x: 0.2, y: 0.20, duration: 1.5 })
-  .to(scene.rotation, { y: -3, duration: 0.5 },'simultaneously')
-  .to(scene.position, { x:0.175, y:-0.01, duration: 1 },'simultaneously')
-  .to(scene.position, { x: -0.1 ,y:-0.01, z:0.05, duration: 1 },'simultaneously')
-
-  .to(camera.position, { x: 0.2 ,y:0.15, duration: 1 },)
-  .to('#three-container', { x:0.2, y:0.5, duration: 1 },);
+if (isMobile) {
+  // Pas d'animations sur mobile - maillot statique
+  // Le maillot reste en position fixe
+} else {
+  // Animations pour desktop
+  modelAnimTl
+    .to(scene.position, { z: 0.5, duration: 0.5 })
+    .to(camera.position, { x: 0.2, y: 0.15, duration: 0.5 })
+    .to(camera.position, { x: -0.2, y: 0.20, duration: 1.5 })
+    .to(camera.position, { x: 0.2, y: 0.20, duration: 1.5 })
+    .to(scene.rotation, { y: -3, duration: 0.5 }, 'simultaneously')
+    .to(scene.position, { x: 0.175, y: -0.01, duration: 1 }, 'simultaneously')
+    .to(scene.position, { x: -0.1, y: -0.07, z: 0.05, duration: 1 }, 'simultaneously')
+    .to(camera.position, { x: 0.2, y: 0.15, duration: 1 })
+    .to('#three-container', { x: 0.2, y: 0.5, duration: 1 });
+}
 
 // Animations des éléments de contenu
 gsap.utils.toArray('section').forEach((section, index) => {
@@ -94,13 +141,43 @@ gsap.utils.toArray('section').forEach((section, index) => {
   }
 });
 
-// Animation de rotation continue du modèle 3D - DÉSACTIVÉE
-// gsap.to(scene.rotation, {
-//   y: '+=2',
-//   duration: 20,
-//   ease: 'none',
-//   repeat: -1
-// });
+// Animation de rotation continue du modèle 3D pendant le scroll
+let rotationTween = null;
+
+// Fonction pour démarrer la rotation automatique
+function startAutoRotation() {
+  if (rotationTween) {
+    rotationTween.kill();
+  }
+  
+  rotationTween = gsap.to(scene.rotation, {
+    y: '+=6.28', // Une rotation complète (2π radians)
+    duration: 8,
+    ease: 'none',
+    repeat: -1
+  });
+}
+
+// Fonction pour arrêter la rotation automatique
+function stopAutoRotation() {
+  if (rotationTween) {
+    rotationTween.kill();
+    rotationTween = null;
+  }
+}
+
+// Démarrer la rotation automatique au début du scroll (mobile uniquement)
+if (isMobile) {
+  ScrollTrigger.create({
+    trigger: '.hero-section',
+    start: 'top top',
+    end: 'bottom bottom',
+    onEnter: startAutoRotation,
+    onLeave: stopAutoRotation,
+    onEnterBack: startAutoRotation,
+    onLeaveBack: stopAutoRotation
+  });
+}
 
 // Animation de pulsation pour le numéro
 gsap.to('.number', {
