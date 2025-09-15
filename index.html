@@ -27,38 +27,119 @@
 </head>
 
 <body>
-  <div class="other-container">
-
-  </div>
   <div id="three-container"></div>
-  <!--  -->
+  
   <div id="sections">
-    <section class="section-blank">
-      blank
+    <!-- Section Hero avec modèle 3D -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Ultras VanRoots</h1>
+        <p class="hero-subtitle">Culture Identity Impact</p>
+        <p class="hero-description">Maillot officiel de la saison</p>
+      </div>
     </section>
-    <section class="section-one">
-      section start
+
+    <!-- Section Marques sur le maillot -->
+    <section class="brands-section">
+      <div class="brands-content">
+        <div class="brands-right">
+          <h2>les masques</h2>
+          <p>En Côte d’Ivoire, les masques représentent un lien fort avec la tradition, la spiritualité et l’unité des communautés. C’est pourquoi nous avons choisi de les intégrer sur notre maillot, afin de valoriser cette richesse culturelle et de porter fièrement notre identité.</p>
+        </div>
+      </div>
     </section>
-    <section class="section-two">
-      <p class="section-two-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing .
-      </span>
-      <p class="section-two-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing 
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-      </p>
+
+    <!-- Section Logo de gauche -->
+    <section class="left-logo-section">
+      <div class="logo-content">
+        <div class="logo-right">
+          <h2>Logo Côté Gauche</h2>
+          <p>Le logo "ULTRAS" représente l'identité visuelle forte de notre mouvement. Il incarne l'esprit de passion, de loyauté et de détermination qui anime notre communauté. Ce symbole distinctif orne fièrement le côté gauche de notre maillot, rappelant nos valeurs et notre engagement.</p>
+        </div>
+      </div>
     </section>
-    <section class="section-three">
-      section ...
+
+    <!-- Section Logo de droite -->
+    <section class="right-logo-section">
+      <div class="logo-content">
+        <div class="logo-right">
+          <h2>Logo Côté Droit</h2>
+          <p>Le logo "VANROOTS" symbolise notre marque principale et notre identité culturelle. Il représente nos racines, notre héritage et notre vision pour l'avenir. Positionné sur le côté droit du maillot, il affirme notre présence et notre engagement envers notre communauté et nos valeurs fondamentales.</p>
+        </div>
+      </div>
     </section>
-    <section class="section-four">
-      section end
+
+    <!-- Section Numéro de dos -->
+    <section class="back-number-section">
+      <div class="number-content">
+        <h2>Numéro de Dos</h2>
+        <div class="number-display">
+          <span class="number">7</span>
+          <span class="number">0</span>
+          <span class="number">9</span>
+        </div>
+        <p>Choisissez votre numéro emblématique</p>
+        <p>Trois options disponibles : 7, 0 ou 9</p>
+      </div>
     </section>
-    <section class="section-blank">
-      blank
+
+    <!-- Section Formulaire de commande -->
+    <section class="order-section">
+      <div class="order-content">
+        <div class="order-background">
+          <h2 class="background-title">Inscrivez-vous pour la Prévente</h2>
+          <p class="background-subtitle">Soyez parmi les premiers à recevoir votre maillot officiel Ultras VanRoots</p>
+        </div>
+        <div class="order-form">
+          <h2>Commander votre Maillot</h2>
+          <form class="order-form-container">
+            <div class="form-group">
+              <label for="firstName">Prénom</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="birthDate">Date de naissance</label>
+              <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="size">Taille du maillot</label>
+              <select id="size" name="size" required>
+                <option value="">Choisir une taille</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="flocking">Flocage (numéro)</label>
+              <select id="flocking" name="flocking" required>
+                <option value="">Choisir un numéro</option>
+                <option value="7">7</option>
+                <option value="0">0</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <button type="submit" class="submit-button">Commander</button>
+          </form>
+        </div>
+      </div>
     </section>
   </div>
 </body>
